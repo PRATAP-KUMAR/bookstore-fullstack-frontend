@@ -19,7 +19,7 @@ function BooksWithTableStyle(props) {
                 <tbody>
                     {books.map((book, index) => (
                         <tr key={book._id} className='h-8 font-custom'>
-                            <td>{index + 1}</td>
+                            <td>{books.length - index}</td>
                             <td className='capitalize'>{book.title}</td>
                             <td>{book.author}</td>
                             <td>{book.publishYear}</td>

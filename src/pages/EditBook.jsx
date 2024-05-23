@@ -43,31 +43,31 @@ function EditBook() {
             publishYear,
         }
 
-        setLoading(true);
-
-        const response = await fetch(`http://localhost:5555/books/${id}`, {
-            method: "PUT",
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json',
+        try {
+            setLoading(true);
+            setError(null);
+            const response = await fetch(`http://localhost:5555/books/${id}`, {
+                method: "PATCH",
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            if (response.ok) {
+                e.target.reset();
+                setTitle(null);
+                setAuthor(null);
+                setPublishYear(null);
+                setLoading(false);
+                navigate('/');
+            } else {
+                setLoading(null);
+                setError(null);
             }
-        });
-
-        const json = await response.json();
-
-        if (!response.ok) {
-            console.log(json.message);
-            setError(json.message);
+        } catch (error) {
+            setError(error);
+            console.log(typeof (error));
             setLoading(false);
-        }
-
-        if (response.ok) {
-            e.target.reset();
-            setTitle(null);
-            setAuthor(null);
-            setPublishYear(null);
-            setLoading(false);
-            navigate('/');
         }
     }
 

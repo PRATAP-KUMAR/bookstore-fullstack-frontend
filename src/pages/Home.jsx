@@ -16,7 +16,7 @@ function Home() {
                 setLoading(true);
                 const response = await fetch("http://localhost:5555/books");
                 const json = await response.json();
-                setBooks(json.data);
+                setBooks(json);
                 setLoading(false);
             } catch (error) {
                 console.log(error.message);
