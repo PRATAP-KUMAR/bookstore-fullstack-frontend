@@ -21,31 +21,33 @@ function CreateBook() {
             publishYear,
         }
 
-        setLoading(true);
-
-        const response = await fetch("http://localhost:5555/books", {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json',
+        try {
+            setLoading(true);
+            const response = await fetch("http://localhost:5555/books", {
+                method: "POST",
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            const json = await response.json();
+            if (!response.ok) {
+                console.log(json.message);
+                setError(json.message);
+                setLoading(null);
             }
-        });
 
-        const json = await response.json();
-
-        if (!response.ok) {
-            console.log(json.message);
-            setError(json.message);
-            setLoading(false);
-        }
-
-        if (response.ok) {
-            e.target.reset();
-            setTitle(null);
-            setAuthor(null);
-            setPublishYear(null);
-            setLoading(false);
-            navigate('/');
+            if (response.ok) {
+                e.target.reset();
+                setTitle(null);
+                setAuthor(null);
+                setPublishYear(null);
+                setLoading(false);
+                navigate('/');
+            }
+        } catch (error) {
+            setError(error);
+            setLoading(null);
         }
     }
 
