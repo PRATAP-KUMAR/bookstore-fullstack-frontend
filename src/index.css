@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply text-2xl;
+  }
+
+  h2 {
+    @apply text-xl;
+  }
+
+  table,
+  table tr,
+  table td,
+  table th {
+    padding: 5px;
+    border: 2px solid theme('colors.toodark');
+    border-spacing: 5px;
+    text-align: center;
+    background-color: theme('colors.toolite');
+  }
+
+  table th {
+    background-color: theme('colors.dark');
+    color: white
+  }
+}
+
+@layer components {
+  .max-width {
+    @apply max-w-4xl mx-auto
+  }
+
+  .min-height {
+    @apply min-h-[calc(100vh-4rem)]
+  }
+
+  .center-div {
+    @apply min-h-[calc(100vh-4rem)] items-center justify-center flex flex-col
+  }
+
+  .tol {
+    @apply text-black
+  }
+
+  .tod {
+    @apply text-white
+  }
+
+  .input {
+    @apply w-full p-2 font-custom text-dark border border-lite placeholder:text-sm focus:ring-toolite focus:border-dark outline-none
+  }
+
+  .btn {
+    @apply px-4 py-2 bg-toodark tod hover:bg-dark font-bold font-custom
+  }
+}
