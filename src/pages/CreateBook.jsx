@@ -7,7 +7,7 @@ function CreateBook() {
 
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
-    const [publishYear, setPublishYear] = useState('');
+    const [year, setYear] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
@@ -18,12 +18,12 @@ function CreateBook() {
         const data = {
             title,
             author,
-            publishYear,
+            year,
         }
 
         try {
             setLoading(true);
-            const response = await fetch("http://localhost:5555/books", {
+            const response = await fetch("http://localhost:3000/books", {
                 method: "POST",
                 body: JSON.stringify(data),
                 headers: {
@@ -41,11 +41,12 @@ function CreateBook() {
                 e.target.reset();
                 setTitle(null);
                 setAuthor(null);
-                setPublishYear(null);
+                setYear(null);
                 setLoading(false);
                 navigate('/');
             }
         } catch (error) {
+            console.log(error);
             setError(error);
             setLoading(null);
         }
@@ -93,8 +94,8 @@ function CreateBook() {
                                     placeholder='Publish Year'
                                     min={1901}
                                     max={new Date().getFullYear()}
-                                    value={publishYear}
-                                    onChange={(e) => setPublishYear(e.target.value)}
+                                    value={year}
+                                    onChange={(e) => setYear(e.target.value)}
                                     className='input'
                                 />
                             </div>

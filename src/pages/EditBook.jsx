@@ -9,7 +9,7 @@ function EditBook() {
 
     const [title, setTitle] = useState(undefined);
     const [author, setAuthor] = useState(undefined);
-    const [publishYear, setPublishYear] = useState(undefined);
+    const [year, setYear] = useState(undefined);
     const [loading, setLoading] = useState(null);
     const [error, setError] = useState(null);
 
@@ -19,11 +19,12 @@ function EditBook() {
         const fetchData = async () => {
             try {
                 setLoading(true);
-                const response = await fetch(`http://localhost:5555/books/${id}`);
+                const response = await fetch(`http://localhost:3000/books/${id}`);
                 const json = await response.json();
-                setTitle(json.title);
-                setAuthor(json.author);
-                setPublishYear(json.publishYear);
+                const { title, author, year } = json;
+                setTitle(title);
+                setAuthor(author);
+                setYear(year);
                 setLoading(null);
             } catch (error) {
                 console.log(error)
@@ -40,14 +41,14 @@ function EditBook() {
         const data = {
             title,
             author,
-            publishYear,
+            year,
         }
 
         try {
             setLoading(true);
             setError(null);
-            const response = await fetch(`http://localhost:5555/books/${id}`, {
-                method: "PATCH",
+            const response = await fetch(`http://localhost:3000/books/${id}`, {
+            method: "PATCH",
                 body: JSON.stringify(data),
                 headers: {
                     'Content-Type': 'application/json',
@@ -57,7 +58,7 @@ function EditBook() {
                 e.target.reset();
                 setTitle(null);
                 setAuthor(null);
-                setPublishYear(null);
+                setYear(null);
                 setLoading(false);
                 navigate('/');
             } else {
@@ -66,7 +67,6 @@ function EditBook() {
             }
         } catch (error) {
             setError(error);
-            console.log(typeof (error));
             setLoading(false);
         }
     }
@@ -83,7 +83,7 @@ function EditBook() {
                 !loading && !error &&
                 <div className='bg-lite'>
                     <div className='max-width min-height font-custom flex flex-col space-y-2 items-center bg-toolite p-5'>
-                        <h1>Edit Book</h1>
+                        <h1 className='font-bold text-center'>Edit Book</h1>
                         <form onSubmit={handleEdit} className='flex flex-col space-y-2 w-full'>
                             <div className='flex items-center justify-center'>
                                 <input
@@ -113,8 +113,8 @@ function EditBook() {
                                     placeholder='Publish Year'
                                     min={1901}
                                     max={new Date().getFullYear()}
-                                    value={publishYear}
-                                    onChange={(e) => setPublishYear(e.target.value)}
+                                    value={year}
+                                    onChange={(e) => setYear(e.target.value)}
                                     className='input'
                                 />
                             </div>

@@ -16,7 +16,7 @@ function ShowBook() {
             try {
                 setLoading(true);
                 setError(null);
-                const response = await fetch(`http://localhost:5555/books/${id}`);
+                const response = await fetch(`http://localhost:3000/books/${id}`);
                 const json = await response.json();
                 setBook(json);
                 setLoading(false);
@@ -37,11 +37,12 @@ function ShowBook() {
                 book &&
                 (
                     <div className='bg-lite'>
-                        <div className='max-width min-height bg-toolite p-5'>
-                            <div className='bg-dark p-5 shadow-custom flex flex-col space-y-2'>
+                        <div className='max-width min-height font-custom flex flex-col space-y-2 items-center bg-toolite p-5'>
+                            <h1>Book Details</h1>
+                            <div className='bg-dark p-5 shadow-custom flex flex-col space-y-2 w-full'>
                                 <div className="border border-toodark px-4 py-2">
                                     <p className='text-toolite text-sm'>Id</p>
-                                    <p className="font-bold font-custom text-green-500">{book._id}</p>
+                                    <p className="font-bold font-custom text-green-500">{book.id}</p>
                                 </div>
                                 <div className="border border-toodark px-4 py-2">
                                     <p className='text-toolite text-sm'>Title</p>
@@ -53,15 +54,15 @@ function ShowBook() {
                                 </div>
                                 <div className="border border-toodark px-4 py-2">
                                     <p className='text-toolite text-sm'>Publish year</p>
-                                    <p className="font-bold font-custom text-orange-500">{book.publishYear}</p>
+                                    <p className="font-bold font-custom text-orange-500">{book.year}</p>
                                 </div>
                                 <div className="border border-toodark px-4 py-2">
                                     <p className='text-toolite text-sm'>Created at</p>
-                                    <p className="font-bold font-custom text-green-500">{new Date(book.createdAt).toLocaleDateString("en-US", options)}</p>
+                                    <p className="font-bold font-custom text-green-500">{new Date(book.created_at).toLocaleDateString("en-US", options)}</p>
                                 </div>
                                 <div className="border border-toodark px-4 py-2">
                                     <p className='text-toolite text-sm'>Updated at</p>
-                                    <p className="font-bold font-custom text-green-500">{new Date(book.updatedAt).toLocaleDateString("en-US", options)}</p>
+                                    <p className="font-bold font-custom text-green-500">{new Date(book.updated_at).toLocaleDateString("en-US", options)}</p>
                                 </div>
                             </div>
                         </div>

@@ -16,7 +16,7 @@ function DeleteBook() {
             try {
                 setLoading(true);
                 setError(null);
-                const response = await fetch(`http://localhost:5555/books/${id}`);
+                const response = await fetch(`http://localhost:3000/books/${id}`);
                 const json = await response.json();
                 setBook(json);
                 setLoading(null);
@@ -34,7 +34,7 @@ function DeleteBook() {
             try {
                 setLoading(true);
                 setError(null);
-                const response = await fetch(`http://localhost:5555/books/${id}`, {
+                const response = await fetch(`http://localhost:3000/books/${id}`, {
                     method: "DELETE",
                     headers: {
                         'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ function DeleteBook() {
                     <div className='max-width min-height font-custom flex flex-col space-y-2 items-center bg-toolite p-5'>
                         <h1>Delete Book</h1>
                         <div className='bg-dark tod flex flex-col p-5 space-y-5'>
-                            <p className='text-center'>Are you sure to delte the Book titled &quot;{book.title}&quot; authored by &quot;{book.author}&quot; with id {book._id}</p>
+                            <p className='text-center'>Are you sure to delte the Book titled &quot;{book.title}&quot; authored by &quot;{book.author}&quot; with id {book.id}</p>
                             <button onClick={handleDeleteBook} className='btn w-fit mx-auto bg-red-500 hover:bg-red-950'>Yes delete</button>
                         </div>
                     </div>

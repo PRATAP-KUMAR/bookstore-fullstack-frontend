@@ -14,7 +14,7 @@ function Home() {
         const fetchData = async () => {
             try {
                 setLoading(true);
-                const response = await fetch("http://localhost:5555/books");
+                const response = await fetch("http://localhost:3000/books");
                 const json = await response.json();
                 setBooks(json);
                 setLoading(false);
